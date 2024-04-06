@@ -1,4 +1,4 @@
-// export * from "./schema_usersModule";
+export * from "./schema_usersModule";
 // export * from "./schema_configModule";
 // export * from "./schema_clientModule";
 // export * from "./schema_formsModule";
