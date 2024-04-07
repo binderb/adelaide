@@ -1,5 +1,5 @@
 DO $$ BEGIN
- CREATE TYPE "type" AS ENUM('Left Breast', 'Right Breast', 'Wet Diaper', 'Dirty Diaper');
+ CREATE TYPE "type" AS ENUM('Left Breast', 'Right Breast', 'Wet Diaper', 'Dirty Diaper', 'Tylenol', 'Ibuprofen');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -14,17 +14,17 @@ CREATE TABLE IF NOT EXISTS "users" (
 	CONSTRAINT "users_username_unique" UNIQUE("username")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "tracking" (
+CREATE TABLE IF NOT EXISTS "trackings" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user" integer NOT NULL,
 	"type" "type" NOT NULL,
-	"timestamp" json NOT NULL,
+	"timestamp" timestamp NOT NULL,
 	"notes" varchar(500),
-	"length" varchar(10)
+	"length" integer
 );
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "tracking" ADD CONSTRAINT "tracking_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "users"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "trackings" ADD CONSTRAINT "trackings_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

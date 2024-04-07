@@ -5,19 +5,18 @@ import { FaSpinner } from 'react-icons/fa';
 
 type Props = {
   text: string
-  type?: 'thick' | 'thin'
   icon?: React.ReactNode
   pendingText: string
   disabled?: boolean
   className?: string
 }
 
-export default function SubmitButton ({text, type, icon, pendingText, disabled, className}:Props) {
+export default function SubmitButton ({text, icon, pendingText, disabled, className}:Props) {
 
   const formStatus = useFormStatus();
 
   return (
-    <button className={`${!type || type === 'thick' ? `std-button-lite` : `std-button-lite-thin`} flex items-center gap-2 ${className || ''}`} disabled={formStatus.pending || disabled}>
+    <button className={`${className || 'std-button-lite flex items-center gap-2'}`} disabled={formStatus.pending || disabled}>
       {!formStatus.pending && (
         <>
           {icon && (

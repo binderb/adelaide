@@ -1,4 +1,4 @@
-import { integer, json, pgEnum, pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { integer, json, pgEnum, pgTable, serial, varchar, timestamp } from "drizzle-orm/pg-core";
 import { users } from "./schema_usersModule";
 import { relations } from "drizzle-orm";
 
@@ -9,15 +9,17 @@ export const trackingTypeEnum = pgEnum('type', [
   'Right Breast',
   'Wet Diaper',
   'Dirty Diaper',
+  'Tylenol',
+  'Ibuprofen',
 ]);
 
-export const trackings = pgTable('tracking', {
+export const trackings = pgTable('trackings', {
   id: serial('id').primaryKey(),
   user: integer('user').notNull().references(()=> users.id),
   type: trackingTypeEnum('type').notNull(),
-  timestamp: json('timestamp').notNull(),
+  timestamp: timestamp('timestamp').notNull(),
   notes: varchar('notes', { length: 500 }),
-  length: varchar('length', { length: 10 }),
+  length: integer('length'),
 });
 
 export const trackingsRelations = relations(trackings, ({one}) => ({

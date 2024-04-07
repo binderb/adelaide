@@ -1,5 +1,5 @@
 {
-  "id": "0dbf5af4-3cd3-4928-b686-8253716d9858",
+  "id": "98f5fdca-f77f-48e5-9904-0d18bf2add01",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -58,8 +58,8 @@
         }
       }
     },
-    "tracking": {
-      "name": "tracking",
+    "trackings": {
+      "name": "trackings",
       "schema": "",
       "columns": {
         "id": {
@@ -82,7 +82,7 @@
         },
         "timestamp": {
           "name": "timestamp",
-          "type": "json",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
@@ -94,16 +94,16 @@
         },
         "length": {
           "name": "length",
-          "type": "varchar(10)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "tracking_user_users_id_fk": {
-          "name": "tracking_user_users_id_fk",
-          "tableFrom": "tracking",
+        "trackings_user_users_id_fk": {
+          "name": "trackings_user_users_id_fk",
+          "tableFrom": "trackings",
           "tableTo": "users",
           "columnsFrom": [
             "user"
@@ -126,7 +126,9 @@
         "Left Breast": "Left Breast",
         "Right Breast": "Right Breast",
         "Wet Diaper": "Wet Diaper",
-        "Dirty Diaper": "Dirty Diaper"
+        "Dirty Diaper": "Dirty Diaper",
+        "Tylenol": "Tylenol",
+        "Ibuprofen": "Ibuprofen"
       }
     }
   },
