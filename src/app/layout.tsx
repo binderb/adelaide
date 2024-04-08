@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "Baby's first Next.js app",
   generator: "Next.js",
   manifest: "/manifest.webmanifest",
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#08adff" }],
   authors: [
     { name: "Ben Binder" },
   ],
