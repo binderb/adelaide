@@ -6,6 +6,7 @@ import { User } from "@/db/schema_usersModule";
 import { useEffect, useState } from "react";
 import { saveData } from "../actions";
 import { Flip, ToastContainer, toast } from "react-toastify";
+import { notify } from "@/lib/helpers";
 
 type Props = {
   currentUser: User
@@ -59,27 +60,6 @@ export default function FeedPicker({currentUser}:Props) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  function notify(type: string, message: string) {
-    if (type === 'error') {
-      toast.error(message, {
-        transition: Flip,
-        theme: 'colored',
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: true,
-      });
-    }
-    if (type === 'success') {
-      toast.success(message, {
-        transition: Flip,
-        theme: 'dark',
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: true,
-      });
-    }
-  }
-
   return (
     <>
     <section className='flex justify-center items-center w-full gap-4 py-2'>
@@ -98,16 +78,16 @@ export default function FeedPicker({currentUser}:Props) {
     </section>
     <section className='flex justify-center items-center w-full gap-4 py-2 px-12'>
       {(!clockStarted && length === 0) && (
-        <button className='bg-primary rounded-md w-full text-[24px] font-bold py-4' onClick={()=>{setClockStarted(true);setRealStartTime(new Date());}}>Start</button>
+        <button className='bg-primary rounded-md w-full text-[20px] font-bold py-4' onClick={()=>{setClockStarted(true);setRealStartTime(new Date());}}>Start</button>
       )}
       {clockStarted && (
-        <button className='bg-[#F20] rounded-md w-full text-[24px] font-bold py-4' onClick={()=>setClockStarted(false)}>Stop</button>
+        <button className='bg-[#F20] rounded-md w-full text-[20px] font-bold py-4' onClick={()=>setClockStarted(false)}>Stop</button>
       )}
       {(!clockStarted && length > 0) && (
         <>
-          <button className='bg-primary rounded-md w-full text-[24px] font-bold py-4' onClick={()=>setLength(0)}>Reset</button>
+          <button className='bg-primary rounded-md w-full text-[20px] font-bold py-4' onClick={()=>setLength(0)}>Reset</button>
           <form action={handleSaveData} className='w-full'>
-          <SubmitButton className='bg-[#18b03b] rounded-md w-full text-[24px] font-bold py-4 flex items-center justify-center gap-2' text='Save' pendingText='Saving...' />
+          <SubmitButton className='bg-[#18b03b] rounded-md w-full text-[20px] font-bold py-4 flex items-center justify-center gap-2' text='Save' pendingText='Saving...' />
           </form>
         </>
       )}
