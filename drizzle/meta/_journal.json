@@ -8,6 +8,20 @@
       "when": 1712522264103,
       "tag": "0000_cynical_cobalt_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1712689662076,
+      "tag": "0001_young_magdalene",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1712737712486,
+      "tag": "0002_mysterious_professor_monster",
+      "breakpoints": true
     }
   ]
 }

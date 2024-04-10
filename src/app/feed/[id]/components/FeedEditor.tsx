@@ -46,7 +46,7 @@ export default function FeedEditor({ feed }: Props) {
               <button onClick={(e) => { e.preventDefault(); setLength(length >= 60 ? length - 60 : length); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>- Min</button>
               <button onClick={(e) => { e.preventDefault(); setLength(length >= 1 ? length - 1 : length); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>- Sec</button>
             </div>
-            <div className='text-[36px]'>{Math.floor(length / 60).toString().padStart(2, '0')}:{(length % 60).toString().padStart(2, '0')}</div>
+            <div className=''>{Math.floor(length / 60).toString().padStart(2, '0')}:{(length % 60).toString().padStart(2, '0')}</div>
             <div className='flex flex-col gap-2'>
               <button onClick={(e) => { e.preventDefault(); setLength(length + 60); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>+ Min</button>
               <button onClick={(e) => { e.preventDefault(); setLength(length + 1); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>+ Sec</button>

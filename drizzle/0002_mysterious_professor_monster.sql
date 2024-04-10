@@ -1,0 +1,1 @@
+ALTER TYPE "subtype" ADD VALUE 'Vitamins';

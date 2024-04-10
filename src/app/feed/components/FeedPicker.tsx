@@ -44,6 +44,7 @@ export default function FeedPicker({currentUser}:Props) {
         id: -1,
         user: currentUser.id,
         type: side === 'left' ? 'Left Breast' : 'Right Breast',
+        subtype: null,
         timestamp: startTime,
         length: length,
         notes: '',

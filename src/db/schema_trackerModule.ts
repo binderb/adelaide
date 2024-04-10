@@ -7,16 +7,24 @@ export type TrackingData = typeof trackings.$inferSelect;
 export const trackingTypeEnum = pgEnum('type', [
   'Left Breast', 
   'Right Breast',
-  'Wet Diaper',
-  'Dirty Diaper',
+  'Diaper',
+  'Med',
+]);
+
+export const trackingSubtypeEnum = pgEnum('subtype', [
+  'Wet',
+  'Dirty',
   'Tylenol',
   'Ibuprofen',
-]);
+  'Stool Softener',
+  'Vitamins'
+]);  
 
 export const trackings = pgTable('trackings', {
   id: serial('id').primaryKey(),
   user: integer('user').notNull().references(()=> users.id),
   type: trackingTypeEnum('type').notNull(),
+  subtype: trackingSubtypeEnum('subtype'),
   timestamp: timestamp('timestamp').notNull(),
   notes: varchar('notes', { length: 500 }),
   length: integer('length'),
