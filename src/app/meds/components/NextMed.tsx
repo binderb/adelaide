@@ -65,11 +65,11 @@ export default async function NextMed({ meds }: Props) {
         )}
       </div>
       <div className='flex gap-2'>
-        <div className=''>You can take Softener (8 hrs): </div>
+        <div className=''>You can take Softener (12 hrs): </div>
         {/* Check if it's been six hours since the last softener */}
         {lastSoftener && (
           <>
-            {new Date().getTime() - lastSoftener.timestamp!.getTime() > 1000 * 60 * 60 * 8 ? (
+            {new Date().getTime() - lastSoftener.timestamp!.getTime() > 1000 * 60 * 60 * 12 ? (
               <div className='text-[#18b03b] flex gap-2 items-center'>
                 <FaCheckCircle />
                 Now
@@ -79,7 +79,7 @@ export default async function NextMed({ meds }: Props) {
                 {/* If not, show the time when it's safe to take again */}
                 <div className='text-[#ffb300] flex gap-2 items-center'>
                   <FaClock />
-                  {new Date(lastSoftener.timestamp!.getTime() + 1000 * 60 * 60 * 8).toLocaleTimeString('en-US', { timeStyle: 'short' })}
+                  {new Date(lastSoftener.timestamp!.getTime() + 1000 * 60 * 60 * 12).toLocaleTimeString('en-US', { timeStyle: 'short' })}
                 </div>
               </>
             )}
