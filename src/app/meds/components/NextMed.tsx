@@ -15,7 +15,7 @@ export default async function NextMed({ meds }: Props) {
   return (
     <section className='ui-box text-[12px]'>
       <div className='flex gap-2'>
-        <div className=''>You can take ibuprofen (6 hrs): </div>
+        <div className=''>You can take Ibuprofen (6 hrs): </div>
         {/* Check if it's been six hours since the last tylenol */}
         {lastIbuprofen && (
           <>
