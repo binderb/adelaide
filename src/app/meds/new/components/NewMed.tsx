@@ -36,11 +36,11 @@ export default function NewMed({ user }: Props) {
     <section className='px-6 pt-6'>
       
       <form className='ui-box' action={handleSaveNewMed}>
-      <section className='flex gap-4 justify-center items-center'>
-          <button className={subType === 'Ibuprofen' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square w-[30%] text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square w-[30%] text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Ibuprofen');}}>Ibuprofen</button>
-          <button className={subType === 'Tylenol' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square w-[30%] text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square w-[30%] text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Tylenol');}}>Tylenol</button>
-          <button className={subType === 'Stool Softener' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square w-[30%] text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square w-[30%] text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Stool Softener');}}>Stool Softener</button>
-          <button className={subType === 'Vitamins' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square w-[30%] text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square w-[30%] text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Vitamins');}}>Vitamins</button>
+      <section className='grid grid-cols-2 gap-4 justify-center items-center'>
+          <button className={subType === 'Ibuprofen' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Ibuprofen');}}>Ibuprofen</button>
+          <button className={subType === 'Tylenol' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Tylenol');}}>Tylenol</button>
+          <button className={subType === 'Stool Softener' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Stool Softener');}}>Stool Softener</button>
+          <button className={subType === 'Vitamins' ? `bg-[#18b03b] rounded-md p-4 text-white font-bold aspect-square text-[2.5cqw]` : `rounded-md p-4 text-white font-bold border-[#18b03b] border-[2px] aspect-square text-[2.5cqw]`} onClick={(e) => {e.preventDefault();setSubType('Vitamins');}}>Vitamins</button>
           
         </section>
         <label className='flex items-center gap-4 w-full'>
