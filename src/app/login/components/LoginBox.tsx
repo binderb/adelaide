@@ -33,7 +33,7 @@ export default function LoginBox() {
 
   return (
     <>
-      <form action={handleLogin} className='flex flex-col gap-2 bg-secondary/20 border border-secondary/80 p-4 rounded-xl min-w-[400px]'>
+      <form action={handleLogin} className='flex flex-col gap-2 bg-secondary/20 border border-secondary/80 p-4 rounded-xl w-[90%] max-w-[500px]'>
         <div className='flex flex-col gap-1'>
           <div className='font-bold pb-1'>Username:</div>
           <input type='text' id='username' name='username' className='std-input w-full' />
