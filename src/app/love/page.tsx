@@ -9,7 +9,7 @@ export default async function Love() {
       <section className="w-full flex pt-4 px-4 items-center justify-between gap-6">
         <div className='flex gap-6 items-center'>
           <Link href="/" className='std-link'>&larr; Back</Link>
-          <h1 className='text-[18px] font-bold'>Med Log</h1>
+          <h1 className='text-[18px] font-bold'>Love</h1>
         </div>
       </section>
     </>

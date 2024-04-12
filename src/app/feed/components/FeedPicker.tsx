@@ -94,7 +94,7 @@ export default function FeedPicker({ currentUser }: Props) {
       </section>
       <section className='flex justify-center items-center w-full gap-4 py-2 text-[32px]'>
         <button onClick={() => setStartTime(new Date(startTime.getTime() - 300000))} className='flex justify-center items-center rounded-full bg-primary p-2'><FaMinus /></button>
-        <div className='w-full px-2 flex justify-center items-center font-bold bg-primary/50 rounded-md'>{`${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padStart(2, '0')} ${startTime.getHours() < 12 ? 'AM' : 'PM'}`}</div>
+        <div className='w-full px-2 flex justify-center items-center font-bold bg-primary/50 rounded-md'>{startTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
         <button className='flex justify-center items-center rounded-full bg-primary p-2' onClick={() => setStartTime(new Date(startTime.getTime() + 300000))}><FaPlus /></button>
       </section>
       <section className='grid grid-cols-2 gap-4 py-2 w-full'>
