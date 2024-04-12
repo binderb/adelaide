@@ -14,6 +14,7 @@ export const trackingTypeEnum = pgEnum('type', [
 export const trackingSubtypeEnum = pgEnum('subtype', [
   'Wet',
   'Dirty',
+  'Both',
   'Tylenol',
   'Ibuprofen',
   'Stool Softener',
