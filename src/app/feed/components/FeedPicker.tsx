@@ -88,20 +88,20 @@ export default function FeedPicker({ currentUser }: Props) {
   }
 
   return (
-    <>
+    <main className='px-4'>
       <section className='flex justify-center items-center w-full gap-4 py-2'>
         {startTime.getMonth() + 1}/{startTime.getDate()}/{startTime.getFullYear()}
       </section>
-      <section className='flex justify-center items-center w-full gap-4 py-2 text-[36px] px-12'>
+      <section className='flex justify-center items-center w-full gap-4 py-2 text-[32px]'>
         <button onClick={() => setStartTime(new Date(startTime.getTime() - 300000))} className='flex justify-center items-center rounded-full bg-primary p-2'><FaMinus /></button>
         <div className='w-full px-2 flex justify-center items-center font-bold bg-primary/50 rounded-md'>{`${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padStart(2, '0')} ${startTime.getHours() < 12 ? 'AM' : 'PM'}`}</div>
         <button className='flex justify-center items-center rounded-full bg-primary p-2' onClick={() => setStartTime(new Date(startTime.getTime() + 300000))}><FaPlus /></button>
       </section>
-      <section className='grid grid-cols-2 gap-4 px-12 py-2 w-full'>
+      <section className='grid grid-cols-2 gap-4 py-2 w-full'>
         <button className={side === 'left' ? `bg-primary rounded-md p-4 text-white w-full h-[150px] font-bold` : `bg-black rounded-md p-4 text-white w-full font-bold h-[150px] border-primary border-[5px]`} onClick={() => setSide('left')}>Left</button>
         <button className={side === 'right' ? `bg-primary rounded-md p-4 text-white w-full h-[150px] font-bold` : `bg-black rounded-md p-4 text-white w-full font-bold h-[150px] border-primary border-[5px]`} onClick={() => setSide('right')}>Right</button>
       </section>
-      <section className='flex justify-center items-center w-full gap-4 py-2 px-12'>
+      <section className='flex justify-center items-center w-full gap-4 py-2'>
         {(!clockStarted && length === 0) && (
           <button className='flex items-center justify-center gap-2 bg-primary rounded-md w-full text-[20px] font-bold py-4' onClick={startClock}><FaPlay />Start</button>
         )}
@@ -129,11 +129,11 @@ export default function FeedPicker({ currentUser }: Props) {
           </>
         )}
       </section>
-      <section className='flex justify-center items-center w-full gap-4 py-2 px-12'>
+      <section className='flex justify-center items-center w-full gap-4 py-2'>
         {/* Show the length of the feed in minutes and seconds */}
         <div className='text-[36px] w-full flex justify-center items-center font-bold bg-primary/50 rounded-md'>{Math.floor(length / 60).toString().padStart(2, '0')}:{(length % 60).toString().padStart(2, '0')}</div>
       </section>
       <ToastContainer className='font-inter' />
-    </>
+    </main>
   );
 }
