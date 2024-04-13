@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { updateFeed } from "../actions";
 import { ToastContainer } from "react-toastify";
 import { notify } from "@/lib/helpers";
+import { useRouter } from "next/navigation";
 
 type Props = {
   feed: TrackingData;
@@ -13,6 +14,7 @@ type Props = {
 
 export default function FeedEditor({ feed }: Props) {
 
+  const router = useRouter();
   const [length, setLength] = useState(feed.length || 0);
   const [timestamp, setTimestamp] = useState<Date | null>(feed.timestamp || new Date());
 
@@ -22,7 +24,7 @@ export default function FeedEditor({ feed }: Props) {
     formData.append("timestamp", timestamp?.toISOString() || '');
     try {
       await updateFeed(formData);
-      notify('success', 'Feed updated successfully!');
+      router.push(`/feed/log`);
     } catch (err: any) {
       notify('error', err.message);
     }
@@ -40,8 +42,7 @@ export default function FeedEditor({ feed }: Props) {
           </select>
         </label>
         <label className='flex items-center gap-4'>
-          Duration:
-          <div className='w-full flex justify-start items-center font-bold bg-primary/50 rounded-md gap-4 py-2 px-4'>
+          <div className='w-full flex justify-center items-center font-bold bg-primary/50 rounded-md gap-4 py-2 px-4'>
             <div className='flex flex-col gap-2'>
               <button onClick={(e) => { e.preventDefault(); setLength(length >= 60 ? length - 60 : length); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>- Min</button>
               <button onClick={(e) => { e.preventDefault(); setLength(length >= 1 ? length - 1 : length); }} className='flex justify-center items-center rounded-full bg-primary px-4 py-1'>- Sec</button>

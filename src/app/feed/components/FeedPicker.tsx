@@ -22,46 +22,54 @@ export default function FeedPicker({ currentUser }: Props) {
   const [clockStarted, setClockStarted] = useState(false);
   const [lengthInterval, setLengthInterval] = useState<NodeJS.Timeout | null>(null);
   const [clockPaused, setClockPaused] = useState(false);
-
-  // let lengthInterval: NodeJS.Timeout | null = null;
-
-  useEffect(() => {
-    console.log('lengthInterval:', lengthInterval);
-  }, [lengthInterval]);
+  const [clockRefTime, setClockRefTime] = useState(new Date());
 
   useEffect(() => {
-    console.log('length:', length);
-  }, [length]);
+    if (clockStarted) {
+      setLengthInterval(setInterval(() => {
+        setLength(Math.floor((Date.now() - clockRefTime.getTime()) / 1000));
+      }, 1000));
+    }
+    if (!clockStarted) {
+      if (lengthInterval) clearInterval(lengthInterval);
+      setLengthInterval(null);
+    }
+  }, [clockStarted]);
 
-  function startClock () {
+  useEffect(() => {
+    if (clockStarted && !clockPaused && length > 0 && !lengthInterval) {
+      console.log('unpaused!');
+      setLengthInterval(setInterval(() => {
+        setLength(Math.floor((Date.now() - clockRefTime.getTime()) / 1000));
+      }, 1000));
+    }
+  }, [clockPaused, lengthInterval]);
+
+  function startClock() {
     setClockStarted(true);
-    if (lengthInterval) clearInterval(lengthInterval);
-    setLength(0);
-    setLengthInterval(setInterval(() => {
-      setLength((prev) => prev + 1);
-    }, 1000));
+    setClockRefTime(new Date());
   }
 
-  function pauseClock () {
+  function pauseClock() {
     setClockPaused(true);
     if (lengthInterval) clearInterval(lengthInterval);
+    setLengthInterval(null);
   }
 
-  function resumeClock () {
+  function resumeClock() {
+    console.log('beginning unpause...');
     setClockPaused(false);
-    if (lengthInterval) clearInterval(lengthInterval);
-    setLengthInterval(setInterval(() => {
-      setLength((prev) => prev + 1);
-    }, 1000));
+    setClockRefTime(new Date(Date.now() - length * 1000));
   }
 
-  function stopClock () {
+  function stopClock() {
     setClockStarted(false);
-    if (lengthInterval) clearInterval(lengthInterval);
   }
-  
-  function resetClock () {
+
+  function resetClock() {
     setLength(0);
+    if (lengthInterval) clearInterval(lengthInterval);
+    setLengthInterval(null);
     setClockStarted(false);
     setClockPaused(false);
   }
@@ -94,7 +102,7 @@ export default function FeedPicker({ currentUser }: Props) {
       </section>
       <section className='flex justify-center items-center w-full gap-4 py-2 text-[32px]'>
         <button onClick={() => setStartTime(new Date(startTime.getTime() - 300000))} className='flex justify-center items-center rounded-full bg-primary p-2'><FaMinus /></button>
-        <div className='w-full px-2 flex justify-center items-center font-bold bg-primary/50 rounded-md'>{startTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        <div className='w-full px-2 flex justify-center items-center font-bold bg-primary/50 rounded-md'>{startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
         <button className='flex justify-center items-center rounded-full bg-primary p-2' onClick={() => setStartTime(new Date(startTime.getTime() + 300000))}><FaPlus /></button>
       </section>
       <section className='grid grid-cols-2 gap-4 py-2 w-full'>

@@ -3,9 +3,9 @@
 import { db } from "@/db";
 import { trackings } from "@/db/schema_trackerModule";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 export async function updateFeed(formData: FormData) {
-  console.log('formData', formData);
   const id = Number(formData.get('id'));
   const type = formData.get('type') as "Left Breast" | "Right Breast";
   const length = Number(formData.get('length'));
@@ -16,4 +16,5 @@ export async function updateFeed(formData: FormData) {
     length,
     timestamp,
   }).where(eq(trackings.id, id));
+  revalidatePath(`/feed/${id}`);
 }
