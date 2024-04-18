@@ -4,6 +4,7 @@ import { relations } from "drizzle-orm";
 
 export type TrackingData = typeof trackings.$inferSelect;
 export type Night = typeof nights.$inferSelect;
+export type NightWithTags = Night & { tags: NightTag[] };
 export type NightTag = typeof tags.$inferSelect;
 
 export const trackingTypeEnum = pgEnum('type', [
@@ -89,11 +90,12 @@ export const nightsRelations = relations(nights, ({many, one}) => ({
 export const tags = pgTable('tags', {
   id: serial('id').primaryKey(),
   text: tagTextEnum('text').notNull(),
+  night: integer('night').notNull().references(()=> nights.id),
 });
 
 export const tagsRelations = relations(tags, ({one}) => ({
   night: one(nights, {
-    fields: [tags.id],
+    fields: [tags.night],
     references: [nights.id],
   }),
 }));

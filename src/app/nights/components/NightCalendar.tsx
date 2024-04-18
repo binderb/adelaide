@@ -2,6 +2,7 @@
 
 import { Night } from "@/db/schema_trackerModule";
 import Link from "next/link";
+import { BsEmojiDizzyFill, BsEmojiFrownFill, BsEmojiLaughingFill, BsEmojiNeutralFill, BsEmojiSmileFill } from "react-icons/bs";
 import { FaSmile } from "react-icons/fa";
 
 type Props = {
@@ -9,6 +10,22 @@ type Props = {
 }
 
 export default function NightCalendar({ nights }: Props) {
+
+  const ratingColors = {
+    Great: 'text-appYellow',
+    Good: 'text-[#98ea2e]',
+    Ok: 'text-primary',
+    Bad: 'text-appOrange',
+    Awful: 'text-appRed',
+  };
+
+  const ratingIcons = {
+    Great: <BsEmojiLaughingFill className='text-appYellow' />,
+    Good: <BsEmojiSmileFill className='text-[#98ea2e]' />,
+    Ok: <BsEmojiNeutralFill className='text-appBlue' />,
+    Bad: <BsEmojiFrownFill className='text-appOrange' />,
+    Awful: <BsEmojiDizzyFill className='text-appRed' />,
+  };
 
   return (
     <>
@@ -34,8 +51,10 @@ export default function NightCalendar({ nights }: Props) {
                           </div>
                           <div className='flex flex-grow w-full items-center justify-center text-[5cqw]'>
                             {/* if there is a night for this date, show a smiley face */
-                            nights.some(night => night.date.toISOString() === date.toISOString().slice(0,10)) && (
-                              <FaSmile />
+                            nights.some(night => night.date.toISOString().slice(0,10) === date.toISOString().slice(0,10)) && (
+                              <>
+                              {ratingIcons[nights.find(night => night.date.toISOString().slice(0,10) === date.toISOString().slice(0,10))?.rating as keyof typeof ratingIcons]}
+                              </>
                             )}
                           </div>
                         </Link>

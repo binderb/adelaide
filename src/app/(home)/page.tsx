@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start">
       <Nav />
-      <section className='grid grid-cols-2 gap-8 px-[10%] py-8 w-full'>
+      <section className='grid grid-cols-2 gap-4 px-[10%] py-8 w-full'>
         <Link href='/feed' className='bg-appRed rounded-md p-4 text-white w-full aspect-square flex justify-center items-center text-center flex-col'><FaPersonBreastfeeding className='text-[10cqw]' /><div className='text-[5cqw] font-bold'>Feed</div></Link>
         <Link href='/diapers' className='bg-appOrange rounded-md p-4 text-white w-full aspect-square flex justify-center items-center text-center flex-col'><LuShovel className='text-[10cqw]' /><div className='text-[5cqw] font-bold'>Diapers</div></Link>
         <Link href='/meds' className='bg-appGreen rounded-md p-4 text-white w-full aspect-square flex justify-center items-center text-center flex-col'><GiMedicines className='text-[10cqw]' /><div className='text-[5cqw] font-bold'>Meds</div></Link>

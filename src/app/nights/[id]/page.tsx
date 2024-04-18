@@ -13,7 +13,10 @@ export default async function EditNight ({params} : {params: {id: string}}) {
   const formattedDate = `${params.id.slice(4,6)}/${params.id.slice(6,8)}/${params.id.slice(0,4)}`;
   const date = new Date(formattedDate);
   const night = await db.query.nights.findFirst({
-    where: eq(nights.date, new Date(formattedDate))
+    where: eq(nights.date, new Date(formattedDate)),
+    with: {
+      tags: true
+    }
   });
   const session = await getServerSession(authOptions);
   const currentUser = await db.query.users.findFirst({where: eq(users.id,parseInt(session!.user.id))}) as User;

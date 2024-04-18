@@ -1,6 +1,6 @@
 'use client';
 import SubmitButton from "@/app/(global components)/SubmitButton";
-import { Night, NightTag, TrackingData, nights, tagTextEnum } from "@/db/schema_trackerModule";
+import { Night, NightTag, NightWithTags, TrackingData, nights, tagTextEnum } from "@/db/schema_trackerModule";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { ToastContainer } from "react-toastify";
@@ -17,14 +17,15 @@ import { HiPuzzlePiece } from "react-icons/hi2";
 
 type Props = {
   user: User;
-  nightData?: Night;
+  nightData?: NightWithTags;
   date: Date;
 };
 
-export default function NightEditor({ user, date }: Props) {
+export default function NightEditor({ user, date, nightData }: Props) {
 
-  const [rating, setRating] = useState('');
-  const [tags, setTags] = useState<NightTag['text'][]>([]);
+  const [rating, setRating] = useState(nightData?.rating || '');
+  const [tags, setTags] = useState<NightTag['text'][]>(nightData?.tags.map((tag) => tag.text) || []);
+  console.log('tags', tags);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
@@ -47,6 +48,14 @@ export default function NightEditor({ user, date }: Props) {
     Ok: 'bg-primary',
     Bad: 'bg-appOrange',
     Awful: 'bg-appRed',
+  };
+
+  const ratingBorders = {
+    Great: 'border-appYellow',
+    Good: 'border-[#98ea2e]',
+    Ok: 'border-primary',
+    Bad: 'border-appOrange',
+    Awful: 'border-appRed',
   };
 
   const ratingIcons = {
@@ -74,13 +83,12 @@ export default function NightEditor({ user, date }: Props) {
 
   return (
     <section className='px-6'>
-
       <form className='ui-box px-[1cqw]' action={handleAddOrUpdateNight}>
         <section className='font-bold'>How was the night?</section>
         <section className='grid grid-cols-5 gap-[1cqw] justify-center items-center'>
           {Object.keys(ratingColors).map((key) => {
             return (
-              <button key={key} className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${rating === key ? `${ratingColors[key as keyof typeof ratingColors]} rounded-md p-4 text-white font-bold aspect-square text-[6cqw]` : `rounded-md p-4 text-white font-bold outline-appPurple outline aspect-square text-[6cqw]`}`} onClick={(e) => { e.preventDefault(); setRating(key); }}>
+              <button key={key} className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${rating === key ? `${ratingColors[key as keyof typeof ratingColors]} ${ratingBorders[key as keyof typeof ratingBorders]} rounded-md p-4 text-white font-bold aspect-square text-[6cqw]` : `rounded-md p-4 text-white font-bold border-appPurple border-[2px] aspect-square text-[6cqw]`}`} onClick={(e) => { e.preventDefault(); setRating(key); }}>
                 {ratingIcons[key as keyof typeof ratingIcons]}
                 <div className='text-[2cqw]'>{key}</div>
               </button>
@@ -106,7 +114,7 @@ export default function NightEditor({ user, date }: Props) {
           })}
         </section>
         <section className='font-bold'>Notes:</section>
-        <textarea className='border border-appPurple bg-secondary/20 rounded-md p-2 w-full h-[200px] resize-none' name='notes' />
+        <textarea className='border border-appPurple bg-secondary/20 rounded-md p-2 w-full h-[200px] resize-none' name='notes' defaultValue={nightData?.notes || ''} />
         <SubmitButton text='Save Changes' pendingText="Saving..." />
       </form>
       <ToastContainer className='font-inter' />
