@@ -20,7 +20,7 @@ export default async function Feed() {
         <h1 className='text-[18px] font-bold'>Feed</h1>
       </section>
       <FeedPicker currentUser={currentUser} />
-      <section className="w-full flex pt-4 px-4 items-center justify-center gap-6">
+      <section className="w-full flex pt-4 px-4 items-center justify-center gap-6 pb-4">
         <Link href="/feed/log" className='std-link'>Feed Log</Link>
       </section>
     </main>

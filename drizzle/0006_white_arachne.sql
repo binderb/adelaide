@@ -1,0 +1,1 @@
+ALTER TABLE "nights" ADD COLUMN "rating" "rating" NOT NULL;

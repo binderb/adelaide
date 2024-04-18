@@ -30,7 +30,7 @@ export default async function Meds() {
             </button>
           </form>
 
-          <Link href='/meds/new' className='bg-[#18b03b] rounded-full px-3 py-2 text-white flex items-center gap-2'>
+          <Link href='/meds/new' className='bg-appGreen rounded-full px-3 py-2 text-white flex items-center gap-2'>
             <FaPlus />
             New
           </Link>

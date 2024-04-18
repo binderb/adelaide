@@ -19,9 +19,9 @@ export default function FeedLogList({ feeds }: Props) {
 
   return (
     <section className="w-full flex flex-col items-center justify-start gap-4 pt-4">
-      <ul className='w-full flex flex-col items-center justify-start gap-2 px-6 text-sm'>
+      <ul className='w-full flex flex-col items-center justify-start gap-2 px-6 text-sm pb-6'>
         {feeds.map((feed) => (
-          <li key={feed.id} className='w-full flex items-center justify-between gap-1 bg-primary/50 px-2 py-1 rounded-md'>
+          <li key={feed.id} className='w-full flex items-center justify-between gap-1 bg-appRed/50 px-2 py-1 rounded-md'>
 
             <p className='whitespace-pre'>
               {/* show date and time without seconds */}
@@ -35,7 +35,7 @@ export default function FeedLogList({ feeds }: Props) {
               </Link>
               <form action={handleDeleteFeed}>
                 <input type='hidden' name='id' value={feed.id} />
-                <button className='rounded-md bg-[#F20] p-1'>
+                <button className='rounded-md bg-appRed p-1'>
                   <FaTrashAlt />
                 </button>
               </form>

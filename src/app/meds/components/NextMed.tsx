@@ -20,7 +20,7 @@ export default async function NextMed({ meds }: Props) {
         {lastIbuprofen && (
           <>
             {new Date().getTime() - lastIbuprofen.timestamp!.getTime() > 1000 * 60 * 60 * 6 ? (
-              <div className='text-[#18b03b] flex gap-2 items-center'>
+              <div className='text-appGreen flex gap-2 items-center'>
                 <FaCheckCircle />
                 Now
               </div>
@@ -45,7 +45,7 @@ export default async function NextMed({ meds }: Props) {
         {lastTylenol && (
           <>
             {new Date().getTime() - lastTylenol.timestamp!.getTime() > 1000 * 60 * 60 * 8 ? (
-              <div className='text-[#18b03b] flex gap-2 items-center'>
+              <div className='text-appGreen flex gap-2 items-center'>
                 <FaCheckCircle />
                 Now
               </div>
@@ -70,7 +70,7 @@ export default async function NextMed({ meds }: Props) {
         {lastSoftener && (
           <>
             {new Date().getTime() - lastSoftener.timestamp!.getTime() > 1000 * 60 * 60 * 12 ? (
-              <div className='text-[#18b03b] flex gap-2 items-center'>
+              <div className='text-appGreen flex gap-2 items-center'>
                 <FaCheckCircle />
                 Now
               </div>

@@ -40,11 +40,11 @@ export default function NewMed({ user }: Props) {
         {/* <section className="font-bold">The Main Event:</section> */}
         <section className='grid grid-cols-3 gap-4 justify-center items-center'>
 
-          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Wet' ? `bg-[#ff9239] rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-[#ff9239] border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Wet'); }}><GiWaterDrop /><div className='text-[3cqw]'>Wet</div></button>
+          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Wet' ? `bg-appOrange rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-appOrange border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Wet'); }}><GiWaterDrop /><div className='text-[3cqw]'>Wet</div></button>
 
-          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Dirty' ? `bg-[#ff9239] rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-[#ff9239] border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Dirty'); }}><FaPoo /><div className='text-[3cqw]'>Dirty</div></button>
+          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Dirty' ? `bg-appOrange rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-appOrange border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Dirty'); }}><FaPoo /><div className='text-[3cqw]'>Dirty</div></button>
 
-          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Both' ? `bg-[#ff9239] rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-[#ff9239] border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Both'); }}><IoThunderstorm /><div className='text-[3cqw]'>Both</div></button>
+          <button className={`flex flex-col gap-[1cqw] items-center justify-center text-[10cqw] ${subType === 'Both' ? `bg-appOrange rounded-md p-4 text-white font-bold aspect-square text-[10cqw]` : `rounded-md p-4 text-white font-bold border-appOrange border-[2px] aspect-square text-[10cqw]`}`} onClick={(e) => { e.preventDefault(); setSubType('Both'); }}><IoThunderstorm /><div className='text-[3cqw]'>Both</div></button>
 
         </section>
         <label className='flex items-center gap-4 w-full'>

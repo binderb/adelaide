@@ -29,7 +29,7 @@ export default async function Diapers() {
               <MdRefresh />
             </button>
           </form>
-          <Link href='/diapers/new' className='bg-[#ff9239] rounded-full px-3 py-2 text-white flex items-center gap-2'>
+          <Link href='/diapers/new' className='bg-appOrange rounded-full px-3 py-2 text-white flex items-center gap-2'>
             <FaPlus />
             New
           </Link>

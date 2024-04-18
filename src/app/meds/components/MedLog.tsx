@@ -22,7 +22,7 @@ export default function MedLog ({ meds }: Props) {
     <section className="w-full flex flex-col items-center justify-start gap-4">
       <ul className='w-full flex flex-col items-center justify-start gap-2 px-6 text-sm'>
         {meds.map((med) => (
-          <li key={med.id} className='w-full flex items-center justify-between gap-1 bg-[#18b03b]/50 px-2 py-1 rounded-md'>
+          <li key={med.id} className='w-full flex items-center justify-between gap-1 bg-appGreen/50 px-2 py-1 rounded-md'>
 
             <p className='whitespace-pre'>
               {/* show date and time without seconds */}
@@ -32,7 +32,7 @@ export default function MedLog ({ meds }: Props) {
             <div className='flex gap-2 items-center text-[20px]'>
               <form action={handleDeleteMed}>
                 <input type='hidden' name='id' value={med.id} />
-                <button className='rounded-md bg-[#F20] p-1'>
+                <button className='rounded-md bg-appRed p-1'>
                   <FaTrashAlt />
                 </button>
               </form>

@@ -29,6 +29,41 @@
       "when": 1712962609731,
       "tag": "0003_legal_mantis",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1713371645665,
+      "tag": "0004_lyrical_thena",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1713371809898,
+      "tag": "0005_lonely_betty_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1713382782184,
+      "tag": "0006_white_arachne",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1713410147709,
+      "tag": "0007_dear_hairball",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1713455614507,
+      "tag": "0008_vengeful_thundra",
+      "breakpoints": true
     }
   ]
 }
