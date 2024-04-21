@@ -10,14 +10,17 @@ import { User, users } from "@/db/schema_usersModule";
 
 export default async function EditNight ({params} : {params: {id: string}}) {
   
+  const date = params.id;
   const formattedDate = `${params.id.slice(4,6)}/${params.id.slice(6,8)}/${params.id.slice(0,4)}`;
-  const date = new Date(formattedDate);
+
+  console.log('date from params:', JSON.stringify(date));
   const night = await db.query.nights.findFirst({
-    where: eq(nights.date, new Date(formattedDate)),
+    where: eq(nights.date, params.id),
     with: {
       tags: true
     }
   });
+  console.log('date from database:', JSON.stringify(night?.date));
   const session = await getServerSession(authOptions);
   const currentUser = await db.query.users.findFirst({where: eq(users.id,parseInt(session!.user.id))}) as User;
 

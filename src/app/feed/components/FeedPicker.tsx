@@ -88,7 +88,7 @@ export default function FeedPicker({ currentUser }: Props) {
         subtype: null,
         timestamp: startTime,
         length: length,
-        latch: rating as TrackingData['latch'],
+        latch: rating as TrackingData['latch'] || null,
         notes: '',
       };
       await saveData(newTrackingData);

@@ -11,14 +11,14 @@ export async function addOrUpdateNight (formData: FormData) {
   if (!formData.get('rating')) throw new Error('Rating is required');
 
   const existingNight = await db.query.nights.findFirst({
-    where: eq(nights.date, new Date(formData.get('date') as string))
+    where: eq(nights.date, formData.get('date') as string)
   });
   if (existingNight) {
     console.log('night exists. Updating existing night');
     await db.update(nights).set({
       user: Number(formData.get('user')),
       rating: formData.get('rating') as Night['rating'],
-      date: new Date(formData.get('date') as string),
+      date: formData.get('date') as string,
       notes: formData.get('notes') as string
     }).where(eq(nights.id, existingNight.id));
     // Delete all tags with the same night id
@@ -37,7 +37,7 @@ export async function addOrUpdateNight (formData: FormData) {
     const response = await db.insert(nights).values({
       user: Number(formData.get('user')),
       rating: formData.get('rating') as Night['rating'],
-      date: new Date(formData.get('date') as string),
+      date: formData.get('date') as string,
       notes: formData.get('notes') as string
     }).returning();
     console.log('response', response[0]);
@@ -50,5 +50,10 @@ export async function addOrUpdateNight (formData: FormData) {
       });
     }
   }
+  revalidatePath('/nights');
+}
+
+export async function deleteNight (date: string) {
+  await db.delete(nights).where(eq(nights.date, date));
   revalidatePath('/nights');
 }

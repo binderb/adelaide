@@ -8,6 +8,13 @@
       "when": 1713481054381,
       "tag": "0000_pretty_magdalene",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713644898166,
+      "tag": "0001_petite_sentry",
+      "breakpoints": true
     }
   ]
 }

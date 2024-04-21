@@ -1,0 +1,1 @@
+ALTER TABLE "nights" ALTER COLUMN "date" SET DATA TYPE varchar(100);

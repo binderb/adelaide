@@ -6,19 +6,19 @@ import DatePicker from "react-datepicker";
 import { ToastContainer } from "react-toastify";
 import { notify } from "@/lib/helpers";
 import { User } from "@/db/schema_usersModule";
-import { addOrUpdateNight } from "../actions";
+import { addOrUpdateNight, deleteNight } from "../actions";
 import { useRouter } from "next/navigation";
 import { FaAngry, FaPoo, FaSkull, FaSmile, FaSun, FaTag, FaWind } from "react-icons/fa";
 import { BsEmojiDizzyFill, BsEmojiFrownFill, BsEmojiLaughing, BsEmojiLaughingFill, BsEmojiNeutralFill, BsEmojiSmileFill, BsHearts } from "react-icons/bs";
 import Modal from "@/app/(global components)/Modal";
-import { IoLockClosed } from "react-icons/io5";
+import { IoFastFood, IoLockClosed } from "react-icons/io5";
 import { GiSpikeball } from "react-icons/gi";
 import { HiPuzzlePiece } from "react-icons/hi2";
 
 type Props = {
   user: User;
   nightData?: NightWithTags;
-  date: Date;
+  date: string;
 };
 
 export default function NightEditor({ user, date, nightData }: Props) {
@@ -33,12 +33,23 @@ export default function NightEditor({ user, date, nightData }: Props) {
     formData.append("user", user.id.toString());
     formData.append("rating", rating);
     formData.append("tags", JSON.stringify(tags));
-    formData.append("date", date ? date.toISOString() : '');
+    formData.append("date", date);
     try {
       await addOrUpdateNight(formData);
       router.push('/nights');
     } catch (err: any) {
       notify('error', err.message);
+    }
+  }
+
+  async function handleDeleteEntry () {
+    if (confirm('Are you sure you want to delete this entry?')) {
+      try {
+        await deleteNight(date);
+        router.push('/nights');
+      } catch (err: any) {
+        notify('error', err.message);
+      }
     }
   }
 
@@ -68,7 +79,7 @@ export default function NightEditor({ user, date, nightData }: Props) {
 
   const tagIcons = {
     'Good Latches': <IoLockClosed />,
-    'Cluster Feeding': <BsEmojiLaughingFill />,
+    'Cluster Feeding': <IoFastFood />,
     'Painful Latches': <GiSpikeball />,
     'Very Fussy': <FaAngry />,
     'Long Wake Windows': <FaSun />,
@@ -117,6 +128,9 @@ export default function NightEditor({ user, date, nightData }: Props) {
         <textarea className='border border-appPurple bg-secondary/20 rounded-md p-2 w-full h-[200px] resize-none' name='notes' defaultValue={nightData?.notes || ''} />
         <SubmitButton text='Save Changes' pendingText="Saving..." />
       </form>
+      <div className='flex justify-center w-full text-center py-4'>
+        <button className='text-appRed underline' onClick={handleDeleteEntry}>Delete Entry</button>
+      </div>
       <ToastContainer className='font-inter' />
       <Modal showModal={showModal} className='w-[90%]'>
         <button className='bg-appPurple rounded-full px-3 py-2 text-white flex justify-center items-center gap-2' onClick={(e) => { e.preventDefault(); setShowModal(false); }}>

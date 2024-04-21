@@ -74,7 +74,7 @@ export const nights = pgTable('nights', {
   id: serial('id').primaryKey(),
   user: integer('user').notNull().references(()=> users.id),
   rating: nightRatingEnum('rating').notNull(),
-  date: timestamp('date').notNull(),
+  date: varchar('date', {length: 100 }).notNull(),
   notes: varchar('notes', { length: 500 }),
 });
 
