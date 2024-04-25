@@ -1,13 +1,13 @@
 import Nav from "@/app/(global components)/Nav";
 import { db } from "@/db";
-import { trackings } from "@/db/schema_trackerModule";
+import { feeds, trackings } from "@/db/schema_trackerModule";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import FeedEditor from "./components/FeedEditor";
 
 export default async function EditFeed ({params} : {params: {id: number}}) {
-  const feed = await db.query.trackings.findFirst({
-    where: eq(trackings.id, params.id)
+  const feed = await db.query.feeds.findFirst({
+    where: eq(feeds.id, params.id)
   });
 
   if (!feed) {

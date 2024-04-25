@@ -15,6 +15,13 @@
       "when": 1713644898166,
       "tag": "0001_petite_sentry",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1714063032418,
+      "tag": "0002_wide_phantom_reporter",
+      "breakpoints": true
     }
   ]
 }

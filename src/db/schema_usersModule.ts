@@ -1,6 +1,6 @@
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { trackings } from "./schema_trackerModule";
+import { feeds, trackings } from "./schema_trackerModule";
 
 export type User = typeof users.$inferSelect;
 
@@ -15,4 +15,5 @@ export const users = pgTable('users', {
 
 export const usersRelations = relations(users, ({many}) => ({
   trackingData: many(trackings),
+  feedData: many(feeds),
 }));

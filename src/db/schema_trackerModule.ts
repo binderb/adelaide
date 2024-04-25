@@ -1,8 +1,9 @@
-import { integer, json, pgEnum, pgTable, serial, varchar, timestamp, boolean } from "drizzle-orm/pg-core";
+import { integer, json, pgEnum, pgTable, serial, varchar, timestamp, boolean, decimal } from "drizzle-orm/pg-core";
 import { users } from "./schema_usersModule";
 import { relations } from "drizzle-orm";
 
 export type TrackingData = typeof trackings.$inferSelect;
+export type Feed = typeof feeds.$inferSelect;
 export type Night = typeof nights.$inferSelect;
 export type NightWithTags = Night & { tags: NightTag[] };
 export type NightTag = typeof tags.$inferSelect;
@@ -12,6 +13,13 @@ export const trackingTypeEnum = pgEnum('type', [
   'Right Breast',
   'Diaper',
   'Med',
+]);
+
+export const feedTypeEnum = pgEnum('type', [
+  'Left Breast', 
+  'Right Breast',
+  'Breastmilk Bottle',
+  'Formula Bottle',
 ]);
 
 export const trackingSubtypeEnum = pgEnum('subtype', [
@@ -69,6 +77,25 @@ export const trackingsRelations = relations(trackings, ({one}) => ({
     references: [users.id],
   }),
 }));
+
+export const feeds = pgTable('feeds', {
+  id: serial('id').primaryKey(),
+  user: integer('user').notNull().references(()=> users.id),
+  type: feedTypeEnum('type').notNull(),
+  timestamp: timestamp('timestamp').notNull(),
+  latch: latchRatingEnum('latch'),
+  length: integer('length'),
+  amount: decimal('amount', { precision: 3, scale: 1 }),
+  notes: varchar('notes', { length: 500 }),
+});
+
+export const feedsRelations = relations(feeds, ({one}) => ({
+  user: one(users, {
+    fields: [feeds.user],
+    references: [users.id],
+  }),
+}));
+
 
 export const nights = pgTable('nights', {
   id: serial('id').primaryKey(),

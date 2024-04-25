@@ -1,10 +1,10 @@
 'use client';
 
 import SubmitButton from "@/app/(global components)/SubmitButton";
-import { TrackingData } from "@/db/schema_trackerModule";
+import { Feed, TrackingData } from "@/db/schema_trackerModule";
 import { User } from "@/db/schema_usersModule";
 import { useEffect, useState } from "react";
-import { saveData } from "../actions";
+import { saveData } from "../../actions";
 import { Flip, ToastContainer, toast } from "react-toastify";
 import { notify } from "@/lib/helpers";
 import { FaCheck, FaMinus, FaPause, FaPlay, FaPlus } from "react-icons/fa";
@@ -13,7 +13,7 @@ import { BsEmojiFrownFill, BsEmojiNeutralFill, BsEmojiSmileFill } from "react-ic
 import Breast from "./Breast";
 
 type Props = {
-  currentUser: User;
+  currentUser: number;
 };
 
 export default function FeedPicker({ currentUser }: Props) {
@@ -81,17 +81,18 @@ export default function FeedPicker({ currentUser }: Props) {
     try {
       if (side === '') throw new Error('Please select a side before saving.');
       if (length === 0) throw new Error('Please start the timer before saving.');
-      const newTrackingData: TrackingData = {
+      console.log('user:',currentUser);
+      const newFeedData: Feed = {
         id: -1,
-        user: currentUser.id,
+        user: currentUser,
         type: side === 'left' ? 'Left Breast' : 'Right Breast',
-        subtype: null,
         timestamp: startTime,
         length: length,
         latch: rating as TrackingData['latch'] || null,
+        amount: null,
         notes: '',
       };
-      await saveData(newTrackingData);
+      await saveData(newFeedData);
       setLength(0);
       notify('success', 'Data saved successfully!');
     } catch (err: any) {

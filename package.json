@@ -11,6 +11,8 @@
     "drizzle:migration-push": "node -r esbuild-register src/db/migrate.ts",
     "drizzle:migrate": "drizzle-kit generate:pg --schema=./src/db/schema.ts && node -r esbuild-register src/db/migrate.ts",
     "drizzle:seed": "node -r esbuild-register src/db/seed.ts",
+    "drizzle:importFeeds": "node -r esbuild-register src/db/importFeeds.ts",
+    "drizzle:deleteFeeds": "node -r esbuild-register src/db/deleteFeeds.ts",
     "drizzle:drop": "drizzle-kit drop"
   },
   "dependencies": {

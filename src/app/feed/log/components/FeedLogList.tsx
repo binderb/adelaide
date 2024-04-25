@@ -2,11 +2,13 @@
 
 import { FaEdit, FaPen, FaTrashAlt } from "react-icons/fa";
 import { deleteFeed } from "../actions";
-import { TrackingData } from "@/db/schema_trackerModule";
+import { Feed, TrackingData } from "@/db/schema_trackerModule";
 import Link from "next/link";
+import { BsEmojiFrownFill, BsEmojiNeutralFill, BsEmojiSmileFill } from "react-icons/bs";
+import { LuCircleDashed } from "react-icons/lu";
 
 type Props = {
-  feeds: TrackingData[];
+  feeds: Feed[];
 };
 
 export default function FeedLogList({ feeds }: Props) {
@@ -16,6 +18,18 @@ export default function FeedLogList({ feeds }: Props) {
       await deleteFeed(formData);
     }
   }
+
+  const ratingIcons = {
+    Good: <BsEmojiSmileFill />,
+    Ok: <BsEmojiNeutralFill />,
+    Bad: <BsEmojiFrownFill />,
+  };
+
+  const ratingColors = {
+    Good: 'text-[#98ea2e]',
+    Ok: 'text-primary',
+    Bad: 'text-appOrange',
+  };
 
   return (
     <section className="w-full flex flex-col items-center justify-start gap-4 pt-4">
@@ -27,8 +41,16 @@ export default function FeedLogList({ feeds }: Props) {
               {/* show date and time without seconds */}
               {feed.timestamp!.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }).replace(', ', '\n')}
             </p>
-            <p>{feed.type === 'Right Breast' ? 'Right' : 'Left'}</p>
+            <p>{feed.type === 'Right Breast' ? 'R' : 'L'}</p>
             <p>{Math.floor(feed.length! / 60)}m, {feed.length! % 60}s</p>
+            <p>
+              {feed.latch && (
+                  <span className={`${ratingColors[feed.latch]}`}>{ratingIcons[feed.latch]}</span>
+              )}
+              {!feed.latch && (
+                <LuCircleDashed className='text-secondary' />
+              )}
+            </p>
             <div className='flex gap-2 items-center text-[20px]'>
               <Link className='rounded-md bg-secondary p-1' href={`/feed/${feed.id}`}>
                 <FaPen />

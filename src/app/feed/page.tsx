@@ -1,16 +1,10 @@
+
 import Nav from "@/app/(global components)/Nav";
-import FeedPicker from "./components/FeedPicker";
 import Link from "next/link";
-import { db } from "@/db";
-import { eq } from "drizzle-orm";
-import { User, users } from "@/db/schema_usersModule";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
-import { Flip, toast } from "react-toastify";
+import Breast from "./breast/components/Breast";
+import { GiBabyBottle } from "react-icons/gi";
 
 export default async function Feed() {
-  const session = await getServerSession(authOptions);
-  const currentUser = await db.query.users.findFirst({where: eq(users.id,parseInt(session!.user.id))}) as User;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start">
@@ -19,9 +13,18 @@ export default async function Feed() {
         <Link href="/" className='std-link'>&larr; Back</Link>
         <h1 className='text-[18px] font-bold'>Feed</h1>
       </section>
-      <FeedPicker currentUser={currentUser} />
-      <section className="w-full flex pt-4 px-4 items-center justify-center gap-6 pb-4">
-        <Link href="/feed/log" className='std-link'>Feed Log</Link>
+      <section className='font-bold text-[18px] py-4 px-4'>
+        What kind of feed are we logging?
+      </section>
+      <section className='grid grid-cols-2 gap-4 py-2 px-6 w-full'>
+        <Link href='/feed/breast' className={`rounded-md p-4 text-white w-full font-bold h-[150px] bg-appRed flex flex-col items-center justify-center gap-2`}>
+          <Breast side={'right'} width={'15cqw'} />
+          Breast Feed
+        </Link>
+        <Link href='/feed/bottle' className={`rounded-md p-4 text-white w-full font-bold h-[150px] bg-appRed flex flex-col items-center justify-center gap-2`}>
+          <GiBabyBottle className='text-[15cqw]' />
+          Bottle Feed
+        </Link>
       </section>
     </main>
   );

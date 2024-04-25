@@ -1,6 +1,6 @@
 'use client';
 import SubmitButton from "@/app/(global components)/SubmitButton";
-import { TrackingData } from "@/db/schema_trackerModule";
+import { Feed, TrackingData } from "@/db/schema_trackerModule";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { updateFeed } from "../actions";
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { BsEmojiFrownFill, BsEmojiNeutralFill, BsEmojiSmileFill } from "react-icons/bs";
 
 type Props = {
-  feed: TrackingData;
+  feed: Feed;
 };
 
 export default function FeedEditor({ feed }: Props) {

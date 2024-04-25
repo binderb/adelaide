@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { trackings } from "@/db/schema_trackerModule";
+import { feeds, trackings } from "@/db/schema_trackerModule";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -12,11 +12,11 @@ export async function updateFeed(formData: FormData) {
   const timestamp = new Date(formData.get('timestamp') as string);
   const latch = formData.get('latch') as "Good" | "Ok" | "Bad" | null;
 
-  await db.update(trackings).set({
+  await db.update(feeds).set({
     type,
     length,
     timestamp,
     latch,
-  }).where(eq(trackings.id, id));
+  }).where(eq(feeds.id, id));
   revalidatePath(`/feed/${id}`);
 }

@@ -1,23 +1,13 @@
-import { db } from "@/db";
-import { feeds, trackings } from "@/db/schema_trackerModule";
-import { desc, eq, or } from "drizzle-orm";
-import Link from "next/link";
-import FeedLogList from "./components/FeedLogList";
 import Nav from "@/app/(global components)/Nav";
+import Link from "next/link";
+import { FaSpinner } from "react-icons/fa";
 import { MdRefresh } from "react-icons/md";
 import { refresh } from "./actions";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
 
-export default async function FeedLog() {
-  const session = await getServerSession(authOptions);
-  const allFeeds = await db.query.feeds.findMany({
-    where: eq(feeds.user, parseInt(session!.user.id)),
-    orderBy: [desc(trackings.timestamp)],
-  });
+export default async function FeedLogLoading() {
 
   return (
-    <>
+    <main className="flex min-h-screen flex-col items-center justify-start">
       <Nav />
       <section className="w-full flex pt-4 px-4 items-center justify-between gap-6">
         <div className='flex gap-6 items-center'>
@@ -30,7 +20,9 @@ export default async function FeedLog() {
             </button>
           </form>
       </section>
-      <FeedLogList feeds={allFeeds} />
-    </>
+      <section className='py-4 flex w-full justify-center items-center gap-2'>
+        <FaSpinner className='animate-spin text-[32px]' />
+      </section>
+    </main>
   );
 }
