@@ -15,7 +15,7 @@ export const trackingTypeEnum = pgEnum('type', [
   'Med',
 ]);
 
-export const feedTypeEnum = pgEnum('type', [
+export const feedTypeEnum = pgEnum('feedtype', [
   'Left Breast', 
   'Right Breast',
   'Breastmilk Bottle',
@@ -85,7 +85,7 @@ export const feeds = pgTable('feeds', {
   timestamp: timestamp('timestamp').notNull(),
   latch: latchRatingEnum('latch'),
   length: integer('length'),
-  amount: decimal('amount', { precision: 3, scale: 1 }),
+  amount: decimal('amount', { precision: 4, scale: 2 }),
   notes: varchar('notes', { length: 500 }),
 });
 

@@ -9,7 +9,7 @@ import fs from 'fs';
 
 async function main() {
   // read the trackings.json file in the project root
-  const filePath = './trackings.json';
+  const filePath = './feeds.json';
   const rawData = fs.readFileSync(filePath, 'utf-8');
   const trackings = JSON.parse(rawData) as TrackingData[];
 

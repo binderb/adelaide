@@ -1,5 +1,5 @@
 {
-  "id": "dc8886be-fba3-4f5d-bd21-479f80aa8320",
+  "id": "bd35ced2-cd91-43b8-9a61-6e9b9065b9a9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -58,6 +58,78 @@
         }
       }
     },
+    "feeds": {
+      "name": "feeds",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user": {
+          "name": "user",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "feedtype",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latch": {
+          "name": "latch",
+          "type": "latchrating",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "length": {
+          "name": "length",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(4, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notes": {
+          "name": "notes",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "feeds_user_users_id_fk": {
+          "name": "feeds_user_users_id_fk",
+          "tableFrom": "feeds",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "nights": {
       "name": "nights",
       "schema": "",
@@ -82,7 +154,7 @@
         },
         "date": {
           "name": "date",
-          "type": "timestamp",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
@@ -228,6 +300,15 @@
     }
   },
   "enums": {
+    "feedtype": {
+      "name": "feedtype",
+      "values": {
+        "Left Breast": "Left Breast",
+        "Right Breast": "Right Breast",
+        "Breastmilk Bottle": "Breastmilk Bottle",
+        "Formula Bottle": "Formula Bottle"
+      }
+    },
     "latchrating": {
       "name": "latchrating",
       "values": {

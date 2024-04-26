@@ -6,6 +6,8 @@ import { Feed, TrackingData } from "@/db/schema_trackerModule";
 import Link from "next/link";
 import { BsEmojiFrownFill, BsEmojiNeutralFill, BsEmojiSmileFill } from "react-icons/bs";
 import { LuCircleDashed } from "react-icons/lu";
+import Breast from "../../breast/components/Breast";
+import { GiBabyBottle } from "react-icons/gi";
 
 type Props = {
   feeds: Feed[];
@@ -41,14 +43,47 @@ export default function FeedLogList({ feeds }: Props) {
               {/* show date and time without seconds */}
               {feed.timestamp!.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }).replace(', ', '\n')}
             </p>
-            <p>{feed.type === 'Right Breast' ? 'R' : 'L'}</p>
+            <p className='flex items-center gap-2'>
+              {feed.type === 'Right Breast' && (
+                <>
+                <Breast side='right' width={'24px'} />
+                <div>R</div>
+                </>
+              )}
+              {feed.type === 'Left Breast' && (
+                <>
+                <Breast side='right' width={'24px'} />
+                <div>L</div>
+                </>
+              )}
+              {feed.type === 'Breastmilk Bottle' && (
+                <>
+                <GiBabyBottle className='text-[22px]' />
+                <div>B</div>
+                </>
+              )}
+              {feed.type === 'Formula Bottle' && (
+                <>
+                <GiBabyBottle />
+                <div>F</div>
+                </>
+              )}
+            </p>
             <p>{Math.floor(feed.length! / 60)}m, {feed.length! % 60}s</p>
             <p>
               {feed.latch && (
                   <span className={`${ratingColors[feed.latch]}`}>{ratingIcons[feed.latch]}</span>
               )}
               {!feed.latch && (
-                <LuCircleDashed className='text-secondary' />
+                <>
+                {(feed.type === 'Breastmilk Bottle' || feed.type === 'Formula Bottle') && (
+                  <GiBabyBottle className='text-white text-[22px]' />
+                )}
+                {(feed.type === 'Left Breast' || feed.type === 'Right Breast') && (
+                  <LuCircleDashed className='text-secondary' />
+                )}
+                </>
+                
               )}
             </p>
             <div className='flex gap-2 items-center text-[20px]'>

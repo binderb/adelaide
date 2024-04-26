@@ -1,11 +1,11 @@
 'use server';
 
 import { db } from "@/db";
-import { feeds, trackings } from "@/db/schema_trackerModule";
+import { feeds } from "@/db/schema_trackerModule";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-export async function updateFeed(formData: FormData) {
+export async function updateBreastFeed(formData: FormData) {
   const id = Number(formData.get('id'));
   const type = formData.get('type') as "Left Breast" | "Right Breast";
   const length = Number(formData.get('length'));

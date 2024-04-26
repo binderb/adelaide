@@ -1,4 +1,10 @@
 DO $$ BEGIN
+ CREATE TYPE "feedtype" AS ENUM('Left Breast', 'Right Breast', 'Breastmilk Bottle', 'Formula Bottle');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
  CREATE TYPE "latchrating" AS ENUM('Good', 'Ok', 'Bad');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -38,11 +44,22 @@ CREATE TABLE IF NOT EXISTS "users" (
 	CONSTRAINT "users_username_unique" UNIQUE("username")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "feeds" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"user" integer NOT NULL,
+	"type" "feedtype" NOT NULL,
+	"timestamp" timestamp NOT NULL,
+	"latch" "latchrating",
+	"length" integer,
+	"amount" numeric(4, 2),
+	"notes" varchar(500)
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "nights" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user" integer NOT NULL,
 	"rating" "rating" NOT NULL,
-	"date" timestamp NOT NULL,
+	"date" varchar(100) NOT NULL,
 	"notes" varchar(500)
 );
 --> statement-breakpoint
@@ -62,6 +79,12 @@ CREATE TABLE IF NOT EXISTS "trackings" (
 	"latch" "latchrating",
 	"length" integer
 );
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "feeds" ADD CONSTRAINT "feeds_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "users"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "nights" ADD CONSTRAINT "nights_user_users_id_fk" FOREIGN KEY ("user") REFERENCES "users"("id") ON DELETE no action ON UPDATE no action;

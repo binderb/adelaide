@@ -3,7 +3,7 @@ import SubmitButton from "@/app/(global components)/SubmitButton";
 import { Feed, TrackingData } from "@/db/schema_trackerModule";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { updateFeed } from "../actions";
+import { updateBreastFeed } from "../actions";
 import { ToastContainer } from "react-toastify";
 import { notify } from "@/lib/helpers";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ export default function FeedEditor({ feed }: Props) {
     formData.append("timestamp", timestamp?.toISOString() || '');
     formData.append("latch", rating);
     try {
-      await updateFeed(formData);
+      await updateBreastFeed(formData);
       router.push(`/feed/log`);
     } catch (err: any) {
       notify('error', err.message);

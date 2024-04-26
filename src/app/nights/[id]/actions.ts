@@ -16,7 +16,7 @@ export async function addOrUpdateNight (formData: FormData) {
   if (existingNight) {
     console.log('night exists. Updating existing night');
     await db.update(nights).set({
-      user: Number(formData.get('user')),
+      user: parseInt(formData.get('user') as string),
       rating: formData.get('rating') as Night['rating'],
       date: formData.get('date') as string,
       notes: formData.get('notes') as string
@@ -35,7 +35,7 @@ export async function addOrUpdateNight (formData: FormData) {
   if (!existingNight) {
     console.log('no night exists. Creating new night');
     const response = await db.insert(nights).values({
-      user: Number(formData.get('user')),
+      user: parseInt(formData.get('user') as string),
       rating: formData.get('rating') as Night['rating'],
       date: formData.get('date') as string,
       notes: formData.get('notes') as string

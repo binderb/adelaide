@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1713481054381,
-      "tag": "0000_pretty_magdalene",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1713644898166,
-      "tag": "0001_petite_sentry",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1714063032418,
-      "tag": "0002_wide_phantom_reporter",
+      "when": 1714152589589,
+      "tag": "0000_known_ted_forrester",
       "breakpoints": true
     }
   ]
