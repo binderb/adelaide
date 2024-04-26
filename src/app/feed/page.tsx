@@ -3,6 +3,7 @@ import Nav from "@/app/(global components)/Nav";
 import Link from "next/link";
 import Breast from "./breast/components/Breast";
 import { GiBabyBottle } from "react-icons/gi";
+import { FaClipboardList } from "react-icons/fa";
 
 export default async function Feed() {
 
@@ -16,7 +17,7 @@ export default async function Feed() {
       <section className='font-bold text-[18px] py-4 px-4'>
         What kind of feed are we logging?
       </section>
-      <section className='grid grid-cols-2 gap-4 py-2 px-6 w-full'>
+      <section className='grid grid-cols-2 gap-4 py-4 px-6 w-full'>
         <Link href='/feed/breast' className={`rounded-md p-4 text-white w-full font-bold h-[150px] bg-appRed flex flex-col items-center justify-center gap-2`}>
           <Breast side={'right'} width={'15cqw'} />
           Breast Feed
@@ -24,6 +25,12 @@ export default async function Feed() {
         <Link href='/feed/bottle' className={`rounded-md p-4 text-white w-full font-bold h-[150px] bg-appRed flex flex-col items-center justify-center gap-2`}>
           <GiBabyBottle className='text-[15cqw]' />
           Bottle Feed
+        </Link>
+      </section>
+      <section className='flex w-full justify-center items-center px-6'>
+        <Link href='/feed/log' className='rounded-md px-2 py-6 bg-appRed w-full flex items-center justify-center gap-2 font-bold'>
+          <FaClipboardList className='text-[28px]' />
+          View Log
         </Link>
       </section>
     </main>

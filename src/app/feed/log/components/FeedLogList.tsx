@@ -40,63 +40,73 @@ export default function FeedLogList({ feeds }: Props) {
           <li key={feed.id} className='w-full flex items-center justify-between gap-1 bg-appRed/50 px-2 py-1 rounded-md'>
 
             <p className='whitespace-pre'>
-              {/* show date and time without seconds */}
-              {feed.timestamp!.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }).replace(', ', '\n')}
+              {`${feed.timestamp!.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }).replace(', ', '\n')}`}
             </p>
             <p className='flex items-center gap-2'>
               {feed.type === 'Right Breast' && (
                 <>
-                <Breast side='right' width={'24px'} />
-                <div>R</div>
+                  <Breast side='right' width={'24px'} />
+                  <div>R</div>
                 </>
               )}
               {feed.type === 'Left Breast' && (
                 <>
-                <Breast side='right' width={'24px'} />
-                <div>L</div>
+                  <Breast side='right' width={'24px'} />
+                  <div>L</div>
                 </>
               )}
               {feed.type === 'Breastmilk Bottle' && (
                 <>
-                <GiBabyBottle className='text-[22px]' />
-                <div>B</div>
+                  <GiBabyBottle className='text-[22px]' />
+                  <div>B</div>
                 </>
               )}
               {feed.type === 'Formula Bottle' && (
                 <>
-                <GiBabyBottle />
-                <div>F</div>
+                  <GiBabyBottle />
+                  <div>F</div>
                 </>
               )}
             </p>
-            <p>{Math.floor(feed.length! / 60)}m, {feed.length! % 60}s</p>
             <p>
-              {feed.latch && (
-                  <span className={`${ratingColors[feed.latch]}`}>{ratingIcons[feed.latch]}</span>
-              )}
-              {!feed.latch && (
+              {(feed.type === 'Right Breast' || feed.type === 'Left Breast') && (
                 <>
-                {(feed.type === 'Breastmilk Bottle' || feed.type === 'Formula Bottle') && (
-                  <GiBabyBottle className='text-white text-[22px]' />
-                )}
-                {(feed.type === 'Left Breast' || feed.type === 'Right Breast') && (
-                  <LuCircleDashed className='text-secondary' />
-                )}
+                  {`${Math.floor(feed.length! / 60)}m, ${feed.length! % 60}s`}
                 </>
-                
               )}
-            </p>
-            <div className='flex gap-2 items-center text-[20px]'>
-              <Link className='rounded-md bg-secondary p-1' href={`/feed/${feed.id}`}>
-                <FaPen />
-              </Link>
-              <form action={handleDeleteFeed}>
-                <input type='hidden' name='id' value={feed.id} />
-                <button className='rounded-md bg-appRed p-1'>
-                  <FaTrashAlt />
-                </button>
-              </form>
-            </div>
+              {(feed.type === 'Breastmilk Bottle' || feed.type === 'Formula Bottle') && (
+                <>
+                  {`${parseFloat(feed.amount!).toFixed(2)} oz`}
+                </>
+              )}
+              </p>
+              <p>
+                {feed.latch && (
+                  <span className={`${ratingColors[feed.latch]}`}>{ratingIcons[feed.latch]}</span>
+                )}
+                {!feed.latch && (
+                  <>
+                    {(feed.type === 'Breastmilk Bottle' || feed.type === 'Formula Bottle') && (
+                      <GiBabyBottle className='text-white text-[22px]' />
+                    )}
+                    {(feed.type === 'Left Breast' || feed.type === 'Right Breast') && (
+                      <LuCircleDashed className='text-secondary' />
+                    )}
+                  </>
+
+                )}
+              </p>
+              <div className='flex gap-2 items-center text-[20px]'>
+                <Link className='rounded-md bg-secondary p-1' href={`/feed/${feed.id}`}>
+                  <FaPen />
+                </Link>
+                <form action={handleDeleteFeed}>
+                  <input type='hidden' name='id' value={feed.id} />
+                  <button className='rounded-md bg-appRed p-1'>
+                    <FaTrashAlt />
+                  </button>
+                </form>
+              </div>
           </li>
         ))}
       </ul>
